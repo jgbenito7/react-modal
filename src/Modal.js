@@ -16,12 +16,14 @@ import Provider from './Provider'
 //   ...
 // </Modal.Provider>
 
-const Modal = ({ withControls, ...props }, { modal }) => {
+const Modal = (props, { modal }) => {
   const className = classnames(props.className, 'modal')
 
   modal.open()
 
-  return React.createElement('div', { className }, props.children)
+  return React.createElement('div', {
+    className: props.className
+  }, props.children)
 }
 
 Modal.displayName = 'Modal'
@@ -29,7 +31,7 @@ Modal.Provider = Provider
 
 Modal.propTypes = {
   withControls: PropTypes.arrayOf(PropTypes.func),
-  className: PropTypes.string
+  className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
