@@ -3,30 +3,19 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import Provider from './Provider'
 
-// const modalControls = [
-//   close => <Close onClick={close} />,
-//   () => <Triangle onClick={somethingElse} />
-// ]
+export default class Modal extends React.PureComponent {
+  render() {
+    const { children } = this.props
+    const className = classnames(this.props.className, 'modal')
 
-// <Modal.Provider>
-//   ...
-//     <Modal className="my-cool-modal" withControls={modalControls}>
-//       <h1>The content of my Modal</h1>
-//     </Modal>
-//   ...
-// </Modal.Provider>
+    this.context.modal.open()
 
-const Modal = (props, { modal }) => {
-  const className = classnames(props.className, 'modal')
-
-  modal.open()
-
-  return React.createElement('div', {
-    className: props.className
-  }, props.children)
+    return React.createElement('div', { className }, children)
+  }
 }
 
 Modal.displayName = 'Modal'
+
 Modal.Provider = Provider
 
 Modal.propTypes = {
