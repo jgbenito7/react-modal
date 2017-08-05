@@ -1,3 +1,4 @@
-import Modal from './Modal'
+import Provider from './Provider'
+import withModal from './withModal'
 
-export { Modal }
+export { Provider, withModal }
