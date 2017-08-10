@@ -8,6 +8,8 @@
   "author": "Evan Sherwood <evan@sherwood.io>",
   "license": "MIT",
   "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.13.4",
     "lint-staged": "^3.6.0",
     "prettier-standard": "^6.0.0"
@@ -25,6 +27,12 @@
     ]
   },
   "scripts": {
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
