@@ -31,6 +31,10 @@ export default class Provider extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.isOpen !== nextState.isOpen
+  }
+
   getChildContext () {
     return {
       modal: this.modal
@@ -42,17 +46,13 @@ export default class Provider extends React.Component {
     const { children, closeOnVeilClick } = this.props
     const close = closeOnVeilClick ? this.close : () => {}
 
-    if (!isOpen) {
-      return children
-    }
-
     return React.createElement('div', null, [
-      React.createElement(
+      isOpen && React.createElement(
         Veil,
         { key: 'veil', close },
         React.createElement(Modal, modalProps, content(close))
       ),
-      React.cloneElement(children, { key: 'children' })
+      React.Children.only(children)
     ])
   }
 }
@@ -75,3 +75,5 @@ Provider.propTypes = {
   content: PropTypes.func.isRequired,
   props: PropTypes.object
 }
+
+Provider.displayName = 'Modal.Provider'
