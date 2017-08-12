@@ -31,7 +31,7 @@ export default class Provider extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return this.state.isOpen !== nextState.isOpen
   }
 
