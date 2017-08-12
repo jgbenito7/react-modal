@@ -12,6 +12,7 @@ script:
   - npm run lint
 after_success:
   - npm run semantic-release
+	- npx nyc report --reporter=text-lcov | npx coveralls
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
