@@ -47,11 +47,12 @@ export default class Provider extends React.Component {
     const close = closeOnVeilClick ? this.close : () => {}
 
     return React.createElement('div', null, [
-      isOpen && React.createElement(
-        Veil,
-        { key: 'veil', close },
-        React.createElement(Modal, modalProps, content(close))
-      ),
+      isOpen &&
+        React.createElement(
+          Veil,
+          { key: 'veil', close },
+          React.createElement(Modal, modalProps, content(close))
+        ),
       React.Children.only(children)
     ])
   }

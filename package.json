@@ -9,14 +9,20 @@
   "license": "MIT",
   "devDependencies": {
     "@std/esm": "^0.2.1",
+    "ava": "^0.21.0",
+    "babel-register": "^6.24.1",
+    "browser-env": "^3.1.2",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
+    "enzyme": "^2.9.1",
     "husky": "^0.13.4",
     "lint-staged": "^3.6.0",
     "mocha": "^3.5.0",
     "prettier-standard": "^6.0.0",
+    "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "semantic-release": "^6.3.6",
+    "sinon": "^3.2.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   },
@@ -36,7 +42,7 @@
     "precommit": "lint-staged",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "npx mocha -r @std/esm -u tdd tests/src/**/*.mjs",
+    "test": "ava",
     "lint": "standard | snazzy"
   },
   "config": {
@@ -44,7 +50,15 @@
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "standard": {
-    "env": "mocha"
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "babel": {
+    "presets": [
+      "@ava/stage-4"
+    ]
   }
 }
