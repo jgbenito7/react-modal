@@ -10,6 +10,7 @@ before_script:
   - npm prune
 script:
   - npm test
+  - npm lint
 after_success:
   - npm run semantic-release
 branches:

@@ -9,16 +9,17 @@
   "license": "MIT",
   "devDependencies": {
     "@std/esm": "^0.2.1",
+    "ava": "^0.21.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
     "husky": "^0.13.4",
     "lint-staged": "^3.6.0",
-    "mocha": "^3.5.0",
     "prettier-standard": "^6.0.0",
-    "semantic-release": "^6.3.6"
+    "semantic-release": "^6.3.6",
+    "snazzy": "^7.0.0",
+    "standard": "^10.0.3"
   },
   "dependencies": {
-    "ava": "^0.21.0",
     "classnames": "^2.2.5",
     "hoist-non-react-statics": "^2.2.1",
     "prop-types": "^15.5.10",
@@ -34,14 +35,12 @@
     "precommit": "lint-staged",
     "commit": "git-cz",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
-    "test": "node -r @std/esm ./node_modules/.bin/ava --verbose"
+    "test": "ava --verbose",
+    "lint": "standard | snazzy"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
-  },
-  "@std/esm": {
-    "esm": "js"
   }
 }
