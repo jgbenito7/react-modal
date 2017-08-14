@@ -32,14 +32,16 @@ export default class Modal extends React.PureComponent {
   }
 
   componentDidMount () {
-    if (typeof document === 'undefined' || typeof window === 'undefined') {
+    const win = this.props.win || typeof window === 'undefined' ? null : window
+
+    if (!win) {
       return
     }
 
     this.registerTabBumper()
 
-    const { body } = document
-    const { scrollY } = window
+    const { scrollY } = win
+    const { body } = win.document
 
     body.classList.add('modal__body-freeze')
     body.style.top = `-${scrollY}px`
@@ -48,32 +50,34 @@ export default class Modal extends React.PureComponent {
   }
 
   componentWillUnmount () {
-    if (typeof document === 'undefined' || typeof window === 'undefined') {
+    const win = this.props.win || typeof window === 'undefined' ? null : window
+
+    if (!win) {
       return
     }
 
     this.removeListeners()
 
-    const { body } = document
+    const { body } = win.document
 
     body.classList.remove('modal__body-freeze')
     body.style.top = null
 
-    window.scrollTo(0, this.state.scrollY)
+    win.scrollTo(0, this.state.scrollY)
   }
 
   removeListeners () {
     const firstElement = this.firstElement
     const lastElement = this.lastElement
 
-    if (firstElement !== null) {
+    if (firstElement != null || firstElement !== undefined) {
       firstElement.removeEventListener(
         'keydown',
         this.handleFirstElement.bind(this)
       )
     }
 
-    if (lastElement !== null) {
+    if (lastElement != null || lastElement !== undefined) {
       lastElement.removeEventListener(
         'keydown',
         this.handleLastElement.bind(this)
@@ -145,6 +149,7 @@ Modal.displayName = 'Modal'
 
 Modal.propTypes = {
   className: PropTypes.string,
+  win: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node)
